@@ -1984,6 +1984,393 @@ Transaction processing, buffer pool, query execution, and benchmarking.
 
 ## 9. Networking
 
+### 9.1 Networking Fundamentals
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Network basics
+- Hosts
+- Clients and servers
+- IP addresses
+- Ports
+- Packets
+- Network interfaces
+- Localhost
+
+**Why Cella needs it:**
+Cella may eventually provide a client-server architecture where applications communicate with a Cella server over a network connection.
+
+**Cella connection:**
+Cella server and client architecture.
+
+**Current status:** Not assessed
+
+### 9.2 OSI and TCP/IP Models
+
+**Required depth:** Level 1 — Familiarity
+
+**Topics:**
+
+- OSI model
+- TCP/IP model
+- Application layer
+- Transport layer
+- Network layer
+- Link layer
+- Relationship between layers
+
+**Why Cella needs it:**
+Provides the conceptual model for understanding where Cella's database protocol sits within the networking stack.
+
+**Cella connection:**
+Database client/server communication.
+
+**Current status:** Not assessed
+
+### 9.3 IP and Basic Routing
+
+**Required depth:** Level 1–2 — Familiarity to Working Knowledge
+
+**Topics:**
+
+- IPv4
+- IPv6 concepts
+- IP addresses
+- Subnets
+- Routing basics
+- Loopback address
+- Local network vs remote network
+
+**Why Cella needs it:**
+Cella clients eventually need to connect to database servers running locally or on another machine.
+
+**Cella connection:**
+Server configuration and client connections.
+
+**Current status:** Not assessed
+
+### 9.4 TCP
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- TCP connection
+- Three-way handshake
+- Reliable byte stream
+- Ordering
+- Retransmission
+- Flow control
+- Congestion control
+- Connection termination
+- TCP states
+
+**Why Cella needs it:**
+A database server needs a reliable communication channel between clients and the database engine.
+
+**Cella connection:**
+Cella client/server protocol.
+
+**Current status:** Not assessed
+
+### 9.5 UDP
+
+**Required depth:** Level 1 — Familiarity
+
+**Topics:**
+
+- Datagram communication
+- Connectionless communication
+- Differences between TCP and UDP
+- Reliability trade-offs
+
+**Why Cella needs it:**
+Useful for understanding why TCP is more appropriate for the initial Cella database protocol.
+
+**Cella connection:**
+Networking fundamentals and protocol design.
+
+**Current status:** Not assessed
+
+### 9.6 Sockets
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Socket abstraction
+- `socket`
+- `bind`
+- `listen`
+- `accept`
+- `connect`
+- `send`
+- `recv`
+- `send`
+- `recv`
+- Socket lifecycle
+- Blocking vs non-blocking sockets
+
+**Why Cella needs it:**
+Sockets are the operating-system interface that will allow Cella clients and servers to communicate.
+
+**Cella connection:**
+Database server and client implementation.
+
+**Current status:** Not assessed
+
+### 9.7 Client-Server Architecture
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Client
+- Server
+- Requests
+- Responses
+- Connections
+- Connection lifecycle
+- Multiple clients
+- Server-side processing
+
+**Why Cella needs it:**
+Cella eventually needs to operate as an actual database server that external applications can connect to.
+
+**Cella connection:**
+Cella server architecture.
+
+**Current status:** Not assessed
+
+### 9.8 Network Protocol Design
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Protocol design
+- Messages
+- Requests
+- Responses
+- Message framing
+- Headers
+- Payloads
+- Versioning
+- Error messages
+- Protocol compatibility
+
+**Why Cella needs it:**
+Cella will eventually need a well-defined protocol through which clients can send commands and receive results.
+
+**Cella connection:**
+Cella wire protocol and client libraries.
+
+**Current status:** Not assessed
+
+### 9.9 Serialization and Deserialization Over the Network
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Binary serialization
+- Text serialization
+- Message encoding
+- Byte ordering
+- Length-prefixed messages
+- Framing
+- Protocol parsing
+
+**Why Cella needs it:**
+Cella must convert database requests and responses into bytes that can safely travel across a network connection.
+
+**Cella connection:**
+Client/server protocol.
+
+**Current status:** Not assessed
+
+### 9.10 Blocking and Non-Blocking I/O
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Blocking I/O
+- Non-blocking I/O
+- I/O waiting
+- Readiness
+- Blocking sockets
+- Basic event-driven concepts
+
+**Why Cella needs it:**
+The server must eventually handle clients without unnecessarily blocking the entire system.
+
+**Cella connection:**
+Cella server and concurrent client handling.
+
+**Current status:** Not assessed
+
+### 9.11 Multiplexing and Event Loops
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- `select`
+- `poll`
+- `epoll`
+- Event loops
+- Readiness notifications
+- Connection management
+
+**Why Cella needs it:**
+As Cella supports multiple clients, it will need a strategy for handling many connections efficiently.
+
+**Cella connection:**
+Future server architecture.
+
+**Current status:** Not assessed
+
+### 9.12 Connection Management
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Connection establishment
+- Connection termination
+- Idle connections
+- Connection timeouts
+- Connection limits
+- Keep-alive
+- Error handling
+
+**Why Cella needs it:**
+A database server must manage the lifecycle of client connections safely and predictably.
+
+**Cella connection:**
+Cella server.
+
+**Current status:** Not assessed
+
+### 9.13 Network Errors and Partial I/O
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Partial reads
+- Partial writes
+- Connection reset
+- Disconnects
+- Timeouts
+- Interrupted operations
+- Retry behavior
+- Error propagation
+
+**Why Cella needs it:**
+Network operations cannot assume that one send or receive operation transfers an entire logical database message.
+
+**Cella connection:**
+Cella protocol and client/server reliability.
+
+**Current status:** Not assessed
+
+### 9.14 Security Fundamentals for Database Networking
+
+**Required depth:** Level 1–2 — Familiarity to Working Knowledge
+
+**Topics:**
+
+- Authentication
+- Authorization
+- Encryption
+- TLS concepts
+- Credential handling
+- Trust boundaries
+- Network exposure
+
+**Why Cella needs it:**
+Once Cella accepts connections from other applications, exposing a database over a network creates security considerations.
+
+**Cella connection:**
+Future Cella server and authentication system.
+
+**Current status:** Not assessed
+
+### 9.15 DNS and Service Discovery
+
+**Required depth:** Level 1 — Familiarity
+
+**Topics:**
+
+- DNS basics
+- Hostnames
+- Name resolution
+- Service discovery concepts
+
+**Why Cella needs it:**
+Useful for understanding how applications locate network services, although the initial Cella deployment can simply use IP addresses or localhost.
+
+**Cella connection:**
+Future server deployment.
+
+**Current status:** Not assessed
+
+### 9.16 Network Performance
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Latency
+- Throughput
+- Bandwidth
+- Round-trip time
+- Serialization overhead
+- Network bottlenecks
+
+**Why Cella needs it:**
+A client-server database introduces network overhead that must eventually be understood when benchmarking Cella.
+
+**Cella connection:**
+Server performance and benchmarking.
+
+**Current status:** Not assessed
+
+### 9.17 Database Client Libraries
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Database client APIs
+- Connection pools
+- Query submission
+- Result handling
+- Client-side errors
+- Prepared statements concepts
+
+**Why Cella needs it:**
+A usable database should eventually be accessible from applications through a client library or driver.
+
+**Cella connection:**
+Future Cella client libraries.
+
+**Current status:** Not assessed
+
+### Do not need deep knowledge of:
+
+- BGP
+- OSPF
+- advanced routing protocols
+- network hardware design
+- packet switching hardware
+- wireless protocols
+- advanced congestion-control research
+
 ## 10. Database Fundamentals
 
 ## 11. Linux / POSIX
