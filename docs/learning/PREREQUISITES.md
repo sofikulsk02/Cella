@@ -2951,6 +2951,378 @@ Cella should expose enough information for developers to understand what the dat
 
 ## 11. Linux / POSIX
 
+### 11.1 Linux Command Line
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Shell basics
+- `pwd`
+- `ls`
+- `cd`
+- `mkdir`
+- `cp`
+- `mv`
+- `rm`
+- `cat`
+- `less`
+- `head`
+- `tail`
+- pipes
+- redirection
+- environment variables
+
+**Why Cella needs it:**
+Cella development and debugging will rely heavily on the command line and Linux tooling.
+
+**Cella connection:**
+Development, testing, debugging, experiments, and server operation.
+
+**Current status:** Not assessed
+
+### 11.2 Processes and Process Inspection
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- `ps`
+- `top`
+- `htop`
+- process IDs
+- parent processes
+- process signals
+- process termination
+- basic process inspection
+
+**Why Cella needs it:**
+Cella will run as a process and will eventually need to be investigated under normal and abnormal conditions.
+
+**Cella connection:**
+Debugging, crash testing, server operation, and performance analysis.
+
+**Current status:** Not assessed
+
+### 11.3 File and Directory Operations
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Absolute and relative paths
+- Permissions
+- Ownership
+- File creation
+- File deletion
+- File metadata
+- Symbolic links
+- Hard links
+- `chmod`
+- `chown`
+- `stat`
+
+**Why Cella needs it:**
+Database files, WAL files, logs, and other persistent resources need to be managed correctly by the operating system.
+
+**Cella connection:**
+Storage engine, database files, logs, and administration.
+
+**Current status:** Not assessed
+
+### 11.4 POSIX File APIs
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- `open`
+- `read`
+- `write`
+- `close`
+- `lseek`
+- `fsync`
+- `fdatasync`
+- `stat`
+- `fstat`
+- file descriptor behavior
+- POSIX error handling
+
+**Why Cella needs it:**
+These interfaces provide a direct and understandable boundary between Cella and the operating system's storage facilities.
+
+**Cella connection:**
+File manager, pager, persistence, WAL, and recovery.
+
+**Current status:** Not assessed
+
+### 11.5 POSIX Process APIs
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- `fork`
+- `exec`
+- `wait`
+- `waitpid`
+- process exit
+- environment inheritance
+- signals
+
+**Why Cella needs it:**
+Provides the foundation for understanding process creation and lifecycle, especially for future server and testing tools.
+
+**Cella connection:**
+Development tooling, crash testing, server architecture, and process management.
+
+**Current status:** Not assessed
+
+### 11.5 POSIX Process APIs
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- `fork`
+- `exec`
+- `wait`
+- `waitpid`
+- process exit
+- environment inheritance
+- signals
+
+**Why Cella needs it:**
+Provides the foundation for understanding process creation and lifecycle, especially for future server and testing tools.
+
+**Cella connection:**
+Development tooling, crash testing, server architecture, and process management.
+
+**Current status:** Not assessed
+
+### 11.6 POSIX Threading
+
+**Required depth:** Level 2 initially, Level 3 when concurrency is implemented
+
+**Topics:**
+
+- POSIX threads
+- thread creation
+- thread joining
+- mutexes
+- condition variables
+- read/write locks
+- thread attributes
+
+**Why Cella needs it:**
+Cella's concurrency model ultimately depends on operating-system threads and synchronization primitives.
+
+**Cella connection:**
+Buffer pool, transactions, query execution, and server.
+
+**Current status:** Not assessed
+
+### 11.7 Signals and Interrupt Handling
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- `SIGINT`
+- `SIGTERM`
+- `SIGKILL`
+- signal delivery
+- signal handlers
+- graceful shutdown
+- abnormal termination
+
+**Why Cella needs it:**
+Cella should eventually distinguish between controlled shutdown and unexpected termination and provide appropriate shutdown behavior.
+
+**Cella connection:**
+Server lifecycle, testing, crash experiments, and recovery.
+
+**Current status:** Not assessed
+
+### 11.8 Memory Mapping
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- `mmap`
+- `munmap`
+- memory-mapped files
+- shared mappings
+- protection flags
+- page faults
+
+**Why Cella needs it:**
+Memory mapping provides an important connection between virtual memory and persistent files and may be useful in future Cella experiments.
+
+**Cella connection:**
+Storage experiments and possible future storage implementations.
+
+**Current status:** Not assessed
+
+### 11.9 System Tracing
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- `strace`
+- system-call tracing
+- process tracing
+- observing file I/O
+- observing signals
+- tracing network calls
+
+**Why Cella needs it:**
+Tracing allows you to see what Cella actually asks the operating system to do.
+
+**Cella connection:**
+Storage experiments, debugging, performance analysis, and learning.
+
+**Current status:** Not assessed
+
+### 11.10 Binary and File Inspection
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- `xxd`
+- `hexdump`
+- `od`
+- file type inspection
+- binary file analysis
+
+**Why Cella needs it:**
+Cella's database files will eventually need to be inspected at the raw-byte level.
+
+**Cella connection:**
+Database file format, pages, records, WAL, and debugging.
+
+**Current status:** Not assessed
+
+### 11.11 Build and Toolchain Environment
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- `g++` / `clang++`
+- compiler flags
+- `make`
+- CMake
+- linker behavior
+- environment variables
+- executable permissions
+
+**Why Cella needs it:**
+Cella is a systems-level C++ project and needs a predictable build environment.
+
+**Cella connection:**
+Entire development workflow.
+
+**Current status:** Not assessed
+
+### 11.12 Networking Tools
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- `ping`
+- `ss`
+- `netstat` familiarity
+- `curl`
+- `nc`
+- localhost testing
+- basic port inspection
+
+**Why Cella needs it:**
+These tools will help investigate and validate Cella's future network server.
+
+**Cella connection:**
+Client/server development and debugging.
+
+**Current status:** Not assessed
+
+### 11.13 Resource and Performance Inspection
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- CPU utilization
+- memory usage
+- process resource usage
+- open files
+- thread counts
+- basic system monitoring
+
+**Why Cella needs it:**
+Cella should eventually be benchmarked and observed under real workloads.
+
+**Cella connection:**
+Performance analysis, benchmarking, and server operation.
+
+**Current status:** Not assessed
+
+### 11.14 POSIX Error Handling
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- return values
+- `errno`
+- `perror`
+- error categories
+- interrupted system calls
+- retry behavior
+- partial operations
+
+**Why Cella needs it:**
+Low-level system calls can fail in ways that must be handled explicitly by a database engine.
+
+**Cella connection:**
+Storage, networking, concurrency, and recovery.
+
+**Current status:** Not assessed
+
+### 11.15 Shell Scripting
+
+**Required depth:** Level 1–2 — Familiarity to Working Knowledge
+
+**Topics:**
+
+- shell variables
+- loops
+- conditions
+- command substitution
+- exit codes
+- simple automation scripts
+
+**Why Cella needs it:**
+Shell scripts can automate builds, tests, benchmarks, experiments, and database setup.
+
+**Cella connection:**
+Development workflow and experiment automation.
+
+**Current status:** Not assessed
+
+### Not initially required:
+
+- Linux kernel administration
+- systemd internals
+- advanced shell programming
+- kernel module development
+- advanced package management
+- Linux distribution engineering
+
 ## 12. Debugging & Performance
 
 ## 13. Dependency Map
