@@ -2373,6 +2373,582 @@ Future Cella client libraries.
 
 ## 10. Database Fundamentals
 
+### 10.1 What Is a Database?
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Purpose of a database
+- Database vs file storage
+- Structured data
+- Persistent state
+- Queryable data
+- Database engine
+- Database management system concepts
+
+**Why Cella needs it:**
+Cella must be designed around a clear understanding of the problems databases solve instead of simply implementing isolated features.
+
+**Cella connection:**
+Overall architecture and project scope.
+
+**Current status:** Not assessed
+
+### 10.2 Relational Model
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Relations
+- Tuples
+- Attributes
+- Domains
+- Tables
+- Rows
+- Columns
+- Relational operations
+- Keys
+
+**Why Cella needs it:**
+Cella is a relational database, so its core data model must be based on the relational model rather than a generic storage abstraction.
+
+**Cella connection:**
+Tables, rows, schema, SQL, indexes, and query execution.
+
+**Current status:** Not assessed
+
+### 10.3 Database Schema
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Schema
+- Tables
+- Columns
+- Data types
+- Constraints
+- Relationships
+- Schema metadata
+- Schema changes
+
+**Why Cella needs it:**
+Cella must know the structure and rules of the data it stores and must preserve this metadata persistently.
+
+**Cella connection:**
+Catalog, table creation, query validation, storage, and SQL execution.
+
+**Current status:** Not assessed
+
+### 10.4 Data Types
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Integers
+- Floating-point values
+- Boolean values
+- Strings
+- Fixed-width types
+- Variable-length values
+- Null values
+- Type representation
+- Type conversion
+
+**Why Cella needs it:**
+Cella must define how SQL values are represented both in memory and on disk.
+
+**Cella connection:**
+Records, serialization, expressions, SQL execution, and indexes.
+
+**Current status:** Not assessed
+
+### 10.5 Keys
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Candidate keys
+- Primary keys
+- Composite keys
+- Foreign keys
+- Natural vs surrogate keys
+- Key constraints
+
+**Why Cella needs it:**
+Keys are fundamental to relational identity, indexing, and relationships between tables.
+
+**Cella connection:**
+Schema, constraints, indexes, and relationships.
+
+**Current status:** Not assessed
+
+### 10.6 Constraints and Data Integrity
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- `NOT NULL`
+- `UNIQUE`
+- `PRIMARY KEY`
+- `FOREIGN KEY`
+- `CHECK`
+- Referential integrity
+- Constraint validation
+- Constraint enforcement
+
+**Why Cella needs it:**
+A relational database must protect the integrity of the data instead of simply storing arbitrary values.
+
+**Cella connection:**
+Insert/update/delete operations, schema enforcement, and transactions.
+
+**Current status:** Not assessed
+
+### 10.7 SQL Fundamentals
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- `CREATE`
+- `ALTER`
+- `DROP`
+- `INSERT`
+- `SELECT`
+- `UPDATE`
+- `DELETE`
+- `WHERE`
+- `ORDER BY`
+- `GROUP BY`
+- `HAVING`
+- `LIMIT`
+- Expressions
+- Predicates
+
+**Why Cella needs it:**
+SQL will become the primary interface through which developers interact with Cella.
+
+**Cella connection:**
+Parser, query planner, executor, storage engine.
+
+**Current status:** Not assessed
+
+### 10.8 Joins and Relationships
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Inner join
+- Left join
+- Right join
+- Full join concepts
+- Cross join
+- Join predicates
+- Nested-loop joins
+- Join execution concepts
+
+**Why Cella needs it:**
+Relational applications often store related information across multiple tables and require combining that information in queries.
+
+**Cella connection:**
+Query execution and future query optimization.
+
+**Current status:** Not assessed
+
+### 10.9 Aggregation
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- `COUNT`
+- `SUM`
+- `AVG`
+- `MIN`
+- `MAX`
+- Grouping
+- Aggregate expressions
+
+**Why Cella needs it:**
+Applications frequently need summary queries over stored data.
+
+**Cella connection:**
+Query executor and SQL engine.
+
+**Current status:** Not assessed
+
+### 10.10 Query Processing
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Query parsing
+- Logical query representation
+- Query planning
+- Query execution
+- Operators
+- Expression evaluation
+- Tuple processing
+- Execution pipelines
+
+**Why Cella needs it:**
+Cella must transform a SQL statement into actual operations over stored data.
+
+**Cella connection:**
+SQL parser, query planner, executor, indexes, and storage engine.
+
+**Current status:** Not assessed
+
+### 10.11 Query Execution Operators
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Sequential scan
+- Index scan
+- Filter
+- Projection
+- Sort
+- Join
+- Aggregate
+- Limit
+- Operator composition
+
+**Why Cella needs it:**
+The query executor needs a set of well-defined operations that can transform stored tuples into query results.
+
+**Cella connection:**
+Execution engine.
+
+**Current status:** Not assessed
+
+### 10.12 Query Planning
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Logical plans
+- Physical plans
+- Query cost
+- Alternative execution strategies
+- Sequential scan vs index scan
+- Join strategy
+- Basic cost estimation
+- Plan selection
+
+**Why Cella needs it:**
+The same SQL query can be executed in different ways. Cella should eventually choose a reasonable execution strategy.
+
+**Cella connection:**
+Query optimizer and execution engine.
+
+**Current status:** Not assessed
+
+### 10.13 Indexes
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Why indexes exist
+- Clustered vs non-clustered concepts
+- B-tree indexes
+- B+ tree indexes
+- Hash indexes
+- Index lookup
+- Index maintenance
+- Selectivity
+- Covering index concepts
+
+**Why Cella needs it:**
+Indexes are fundamental to making relational queries efficient as datasets grow.
+
+**Cella connection:**
+B+ tree implementation, query planner, storage engine, and benchmarks.
+
+**Current status:** Not assessed
+
+### 10.14 Transactions
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Transaction
+- `BEGIN`
+- `COMMIT`
+- `ROLLBACK`
+- Atomicity
+- Consistency
+- Isolation
+- Durability
+- Transaction lifecycle
+
+**Why Cella needs it:**
+Transactions provide the reliability guarantees required by normal applications and are central to Cella's definition of correctness.
+
+**Cella connection:**
+Transaction manager, WAL, recovery, locking, and MVCC.
+
+**Current status:** Not assessed
+
+### 10.15 ACID
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Atomicity
+- Consistency
+- Isolation
+- Durability
+- Practical meaning of each property
+- Failure scenarios
+
+**Why Cella needs it:**
+Cella's reliability goals depend on understanding what transaction guarantees actually mean.
+
+**Cella connection:**
+Transactions, recovery, concurrency, and storage.
+
+**Current status:** Not assessed
+
+### 10.16 Concurrency Control
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Concurrent transactions
+- Locking
+- MVCC
+- Serializability
+- Conflict detection
+- Isolation anomalies
+- Transaction scheduling
+
+**Why Cella needs it:**
+Multiple users or threads must be able to work with the database without producing incorrect results or corrupting state.
+
+**Cella connection:**
+Transaction manager and concurrency subsystem.
+
+**Current status:** Not assessed
+
+### 10.17 Write-Ahead Logging
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- WAL concept
+- Log records
+- Log sequence numbers
+- Ordering
+- Flush requirements
+- Redo concepts
+- Undo concepts
+- Checkpoints
+- WAL replay
+
+**Why Cella needs it:**
+WAL is one of the main mechanisms used to make database changes recoverable after crashes.
+
+**Cella connection:**
+Transactions, persistence, recovery, and durability.
+
+**Current status:** Not assessed
+
+### 10.18 Crash Recovery
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Failure scenarios
+- Recovery
+- Redo
+- Undo concepts
+- Checkpoints
+- Recovery metadata
+- Crash testing
+- Recovery correctness
+
+**Why Cella needs it:**
+Cella must be able to restore a consistent database state after unexpected failures.
+
+**Cella connection:**
+WAL, transaction manager, storage engine, and reliability.
+
+**Current status:** Not assessed
+
+### 10.19 Buffer Pool and Buffer Management
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Buffer pool
+- Buffer frames
+- Page pinning
+- Page unpinning
+- Dirty pages
+- Eviction
+- LRU and replacement policies
+- Flush behavior
+
+**Why Cella needs it:**
+The database cannot efficiently operate directly on disk for every operation. It needs an in-memory layer for frequently used pages.
+
+**Cella connection:**
+Storage engine, query executor, indexes, transactions, and performance.
+
+**Current status:** Not assessed
+
+### 10.20 Storage Engine Concepts
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Heap storage
+- Pages
+- Records
+- Slotted pages
+- Free-space management
+- Table files
+- Index files
+- Catalog metadata
+- Buffer management
+
+**Why Cella needs it:**
+This is the layer responsible for turning relational data structures into persistent storage structures.
+
+**Cella connection:**
+Core Cella storage engine.
+
+**Current status:** Not assessed
+
+### 10.21 Database Catalog and Metadata
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- System catalog
+- Table metadata
+- Column metadata
+- Schema metadata
+- Index metadata
+- Type metadata
+- Persistent database metadata
+
+**Why Cella needs it:**
+Cella needs to know what tables and indexes exist, what columns they contain, and how stored data should be interpreted.
+
+**Cella connection:**
+Schema management, SQL execution, storage engine, and query planning.
+
+**Current status:** Not assessed
+
+### 10.22 Query Optimization Fundamentals
+
+**Required depth:** Level 2 initially, Level 3 later
+
+**Topics:**
+
+- Query cost
+- Selectivity
+- Cardinality
+- Scan cost
+- Index selection
+- Join ordering
+- Basic statistics
+- Cost-based optimization concepts
+
+**Why Cella needs it:**
+As Cella matures, choosing a good execution strategy will become important for performance.
+
+**Cella connection:**
+Query planner and future optimizer.
+
+**Current status:** Not assessed
+
+### 10.23 Prepared Statements and Parameterized Queries
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Prepared statements
+- Parameters
+- Query plan reuse
+- Parameter binding
+- SQL injection concept
+
+**Why Cella needs it:**
+A practical database used by applications should eventually provide a safe way to execute parameterized queries.
+
+**Cella connection:**
+SQL interface and client libraries.
+
+**Current status:** Not assessed
+
+### 10.24 Database Security Fundamentals
+
+**Required depth:** Level 1–2 — Familiarity to Working Knowledge
+
+**Topics:**
+
+- Authentication
+- Authorization
+- Privileges
+- Roles
+- SQL injection
+- Credential handling
+- Trust boundaries
+
+**Why Cella needs it:**
+A database intended for real users needs basic security concepts even if its initial security model is intentionally simpler than mature production databases.
+
+**Cella connection:**
+Future client/server architecture and access control.
+
+**Current status:** Not assessed
+
+### 10.25 Database Observability
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Database statistics
+- Metrics
+- Query timing
+- Cache hit rate
+- I/O statistics
+- Transaction statistics
+- Logging
+- Diagnostic information
+
+**Why Cella needs it:**
+Cella should expose enough information for developers to understand what the database is doing internally and investigate performance or correctness problems.
+
+**Cella connection:**
+`cella inspect`, `cella stats`, logging, debugging, and benchmarking.
+
+**Current status:** Not assessed
+
 ## 11. Linux / POSIX
 
 ## 12. Debugging & Performance
