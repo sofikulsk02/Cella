@@ -880,9 +880,1107 @@ Benchmarking, query execution, storage engine, and developer tools.
 
 ## 6. Operating Systems
 
+### 6.1 Processes
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Process concept
+- Process creation
+- Process lifecycle
+- Process states
+- Process termination
+- Parent and child processes
+- Process isolation
+- Process address space
+
+**Why Cella needs it:**
+Cella runs as a process and must understand the environment in which its database engine executes. Later, the database server will also need to manage process-related behavior.
+
+**Cella connection:**
+Database process, crash behavior, server architecture, and operating-system interaction.
+
+**Current status:** Not assessed
+
+### 6.2 Threads
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Thread concept
+- Thread lifecycle
+- User threads vs kernel threads
+- Shared address space
+- Thread-local state
+- Context switching
+- Thread creation and termination
+
+**Why Cella needs it:**
+Cella will eventually perform concurrent work and support multiple simultaneous operations or clients.
+
+**Cella connection:**
+Concurrency, query execution, background tasks, buffer management, and server architecture.
+
+**Current status:** Not assessed
+
+### 6.3 System Calls
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- User mode
+- Kernel mode
+- System calls
+- System-call interface
+- System-call overhead
+- How library functions interact with system calls
+
+**Why Cella needs it:**
+Database operations such as reading, writing, synchronizing, creating files, and communicating over sockets ultimately cross the boundary between user space and the operating system.
+
+**Cella connection:**
+File I/O, persistence, recovery, networking, and process management.
+
+**Current status:** Not assessed
+
+### 6.4 File Descriptors
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- File descriptors
+- Standard input/output/error
+- File descriptor tables
+- Opening and closing descriptors
+- Descriptor lifetime
+- Relationship between descriptors and files/sockets
+
+**Why Cella needs it:**
+Cella's persistent storage and future networking stack will interact with the operating system through file descriptors.
+
+**Cella connection:**
+Storage engine, database files, WAL, sockets, and server implementation.
+
+**Current status:** Not assessed
+
+### 6.5 Virtual Memory
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Virtual address space
+- Pages
+- Page tables
+- Address translation
+- Protection
+- Page faults
+- Copy-on-write
+- Memory mapping
+- Shared memory
+- Memory-mapped files
+
+**Why Cella needs it:**
+Cella's in-memory structures exist inside a virtual address space managed by the operating system. Understanding this is necessary for reasoning about memory behavior and future storage techniques such as memory mapping.
+
+**Cella connection:**
+Buffer management, memory usage, storage, and possible future `mmap` usage.
+
+**Current status:** Not assessed
+
+### 6.6 Scheduling
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- CPU scheduling
+- Time slicing
+- Context switching
+- Scheduling policies
+- Runnable and blocked threads
+
+**Why Cella needs it:**
+Concurrent database operations do not execute in isolation. Understanding scheduling helps explain why concurrent code behaves differently from sequential code.
+
+**Cella connection:**
+Concurrency, server workloads, transactions, and performance analysis.
+
+**Current status:** Not assessed
+
+### 6.7 Synchronization
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Critical sections
+- Mutexes
+- Semaphores
+- Condition variables
+- Read/write locks
+- Atomic operations
+- Race conditions
+- Data races
+- Deadlocks
+- Starvation
+
+**Why Cella needs it:**
+A database cannot safely allow multiple operations to modify shared state without synchronization and clearly defined concurrency rules.
+
+**Cella connection:**
+Buffer pool, transaction manager, locking, query execution, and server.
+
+**Current status:** Not assessed
+
+### 6.8 Inter-Process Communication
+
+**Required depth:** Level 1–2 — Familiarity to Working Knowledge
+
+**Topics:**
+
+- Pipes
+- Shared memory
+- Signals
+- Basic IPC concepts
+- Process communication vs thread communication
+
+**Why Cella needs it:**
+IPC provides useful background for understanding process boundaries and server architecture, even if the initial Cella implementation does not rely heavily on IPC.
+
+**Cella connection:**
+Future server/process architecture and systems understanding.
+
+**Current status:** Not assessed
+
+### 6.9 Signals and Process Failure
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Signals
+- Signal handlers
+- Process termination
+- `SIGINT`
+- `SIGTERM`
+- `SIGKILL`
+- Unexpected process termination
+- Core dumps
+
+**Why Cella needs it:**
+Cella must eventually be tested under abrupt process termination to understand what happens to in-memory state and persistent data.
+
+**Cella connection:**
+Crash testing, recovery, debugging, and shutdown behavior.
+
+**Current status:** Not assessed
+
+### 6.10 File Systems
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Files and directories
+- File metadata
+- Inodes
+- File allocation concepts
+- Blocks
+- Journaling
+- Filesystem caching
+- File permissions
+- Filesystem consistency
+
+**Why Cella needs it:**
+A database stores persistent information using the filesystem or operating-system storage interfaces. Understanding how files are represented and maintained is essential for understanding database persistence.
+
+**Cella connection:**
+Database files, WAL, persistence, recovery, and storage design.
+
+**Current status:** Not assessed
+
+### 6.11 Page Cache and Buffered I/O
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- OS page cache
+- Buffered I/O
+- Direct I/O concepts
+- Cache interaction
+- Dirty pages
+- Writeback
+- Relationship between application buffers and OS cache
+
+**Why Cella needs it:**
+A database may maintain its own buffer/cache while the operating system also caches filesystem data. Understanding both layers is critical for reasoning about performance and durability.
+
+**Cella connection:**
+Buffer pool, storage engine, performance, and durability.
+
+**Current status:** Not assessed
+
+### 6.12 Persistence and Durability
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- `write`
+- `fsync`
+- `fdatasync`
+- Flush semantics
+- Dirty data
+- Persistent vs volatile state
+- Crash consistency
+- Storage durability
+
+**Why Cella needs it:**
+One of Cella's reliability goals is that successfully committed data should remain recoverable after a crash according to Cella's durability guarantees.
+
+**Cella connection:**
+Transactions, WAL, commit, crash recovery, and persistent storage.
+
+**Current status:** Not assessed
+
+### 6.13 Crash Consistency
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Partial writes
+- Torn updates
+- Ordering of writes
+- Crash points
+- Recovery requirements
+- Atomicity of persistent operations
+- Filesystem and storage failure behavior
+
+**Why Cella needs it:**
+Databases must remain correct despite failures occurring at inconvenient points during updates.
+
+**Cella connection:**
+WAL, transactions, recovery, checkpoints, and durability testing.
+
+**Current status:** Not assessed
+
+### 6.14 Kernel and User-Space Boundary
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- User space
+- Kernel space
+- Privileged operations
+- Kernel-managed resources
+- System-call boundary
+- Why applications cannot directly control hardware
+
+**Why Cella needs it:**
+This provides the mental model for understanding how Cella interacts with operating-system-managed resources.
+
+**Cella connection:**
+I/O, memory, processes, networking, and storage.
+
+**Current status:** Not assessed
+
+### we do not currently need deep study of:
+
+- CPU scheduling algorithms inside a production kernel
+- kernel driver development
+- Linux kernel module development
+- advanced virtual-machine internals
+- kernel networking internals
+- filesystem driver implementation
+
 ## 7. Filesystems & Storage
 
+### 7.1 Files and Directories
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Files
+- Directories
+- Paths
+- File metadata
+- File permissions
+- File creation
+- File deletion
+- File renaming
+- File size
+- File ownership
+
+**Why Cella needs it:**
+Cella's database files must be created, located, managed, and persisted correctly by the operating system.
+
+**Cella connection:**
+Database creation, storage files, WAL files, metadata files, and backups.
+
+**Current status:** Not assessed
+
+### 7.2 File Descriptors and File Handles
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- File descriptors
+- Open file state
+- Descriptor lifetime
+- File offsets
+- Descriptor duplication
+- Files vs file descriptors
+- Relationship between descriptors and sockets
+
+**Why Cella needs it:**
+Cella's low-level storage layer will communicate with the operating system through file descriptors.
+
+**Cella connection:**
+File manager, pager, storage engine, WAL, and later networking.
+
+**Current status:** Not assessed
+
+### 7.3 File Offsets and Random Access
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- File offsets
+- Sequential access
+- Random access
+- `lseek`
+- Seeking
+- Reading from specific locations
+- Writing at specific locations
+
+**Why Cella needs it:**
+A database cannot treat its storage file as a simple stream. It needs to locate and update specific pages and structures inside the file.
+
+**Cella connection:**
+Page manager, database pages, record storage, indexes, and recovery.
+
+**Current status:** Not assessed
+
+### 7.4 Blocks and Storage Units
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Storage blocks
+- Filesystem blocks
+- Logical vs physical storage
+- Block addressing
+- Relationship between blocks and files
+
+**Why Cella needs it:**
+Database systems organize data into fixed-size units that eventually interact with lower-level storage units.
+
+**Cella connection:**
+Page design, storage layout, buffering, and I/O.
+
+**Current status:** Not assessed
+
+### 7.5 Database Pages
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Fixed-size pages
+- Page identifiers
+- Page layout
+- Page headers
+- Free space
+- Page boundaries
+- Page alignment
+- Page serialization
+- Page reads/writes
+
+**Why Cella needs it:**
+Pages will be one of the fundamental units of Cella's storage engine.
+
+**Cella connection:**
+Pager, buffer pool, records, B+ trees, indexes, and persistent storage.
+
+**Current status:** Not assessed
+
+### 7.6 Record Layout
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Fixed-length records
+- Variable-length records
+- Field offsets
+- Null values
+- Record headers
+- Slot directories
+- Slotted pages
+- Record serialization
+
+**Why Cella needs it:**
+Cella must decide exactly how rows are represented inside database pages.
+
+**Cella connection:**
+Tables, tuples, updates, deletes, scans, and storage engine design.
+
+**Current status:** Not assessed
+
+### 7.7 Free Space Management
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Free space
+- Free pages
+- Free lists
+- Allocation
+- Reuse of deleted space
+- Fragmentation
+
+**Why Cella needs it:**
+Cella needs a way to determine where new records can be stored and how deleted or freed space can be reused.
+
+**Cella connection:**
+Table storage, page allocation, inserts, and deletes.
+
+**Current status:** Not assessed
+
+### 7.8 Filesystem Caching
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- OS page cache
+- Buffered writes
+- Read caching
+- Dirty pages
+- Writeback
+- Cache eviction
+- Application cache vs OS cache
+
+**Why Cella needs it:**
+Cella may maintain its own buffer pool while the operating system also caches file data. Understanding both layers is essential for reasoning about performance and durability.
+
+**Cella connection:**
+Buffer pool, storage engine, performance, and persistence.
+
+**Current status:** Not assessed
+
+### 7.9 Persistence and Flush Semantics
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- `write`
+- `fsync`
+- `fdatasync`
+- Flush operations
+- Dirty data
+- Persistence guarantees
+- Volatile vs durable state
+- Write ordering
+
+**Why Cella needs it:**
+Cella must understand when data written by the database is merely in memory or OS caches and when it can be considered durable according to its guarantees.
+
+**Cella connection:**
+Transactions, WAL, commit, checkpoints, and recovery.
+
+**Current status:** Not assessed
+
+### 7.10 Crash Consistency
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Partial writes
+- Torn writes
+- Write ordering
+- Crash points
+- Atomicity of updates
+- Recovery requirements
+- Filesystem behavior during crashes
+
+**Why Cella needs it:**
+A database must remain logically correct even when the process or machine fails during an update.
+
+**Cella connection:**
+WAL, transactions, recovery, checkpoints, and durability testing.
+
+**Current status:** Not assessed
+
+### 7.11 Journaling and Filesystem Journals
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Filesystem journaling
+- Metadata journaling
+- Ordered writes
+- Journal vs database WAL
+- What filesystem journaling does and does not guarantee
+
+**Why Cella needs it:**
+Cella's WAL and recovery mechanisms operate on top of a filesystem. Understanding filesystem journaling helps distinguish database-level durability from filesystem-level guarantees.
+
+**Cella connection:**
+WAL, crash recovery, and durability.
+
+**Current status:** Not assessed
+
+### 7.12 SSDs, HDDs, and Persistent Storage
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- HDD characteristics
+- SSD characteristics
+- Flash storage
+- NVMe
+- Random vs sequential I/O
+- Latency
+- Throughput
+- IOPS
+- Storage endurance
+
+**Why Cella needs it:**
+Storage characteristics influence page layout, buffering, write strategies, indexing, and performance.
+
+**Cella connection:**
+Storage engine, buffer pool, WAL, and benchmarking.
+
+**Current status:** Not assessed
+
+### 7.13 Storage Reliability
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Data corruption
+- Bad sectors / media errors
+- Checksums
+- Redundancy concepts
+- Backup
+- Restore
+- Integrity verification
+
+**Why Cella needs it:**
+A reliable database must eventually consider not only application crashes but also storage-level corruption and integrity verification.
+
+**Cella connection:**
+Database pages, WAL, checksums, recovery, and future backup tooling.
+
+**Current status:** Not assessed
+
+### 7.14 Memory-Mapped Files
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- `mmap`
+- `munmap`
+- Memory-mapped files
+- Shared mappings
+- Page faults
+- Advantages and disadvantages of memory mapping
+
+**Why Cella needs it:**
+Memory mapping is an important database/storage technique and provides another way to understand the relationship between files and virtual memory.
+
+**Cella connection:**
+Possible future storage strategies and systems experiments.
+
+**Current status:** Not assessed
+
+### 7.15 Storage Layout and Locality
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Sequential layout
+- Random layout
+- Spatial locality
+- Data clustering
+- Fragmentation
+- Read amplification
+- Write amplification
+- I/O locality
+
+**Why Cella needs it:**
+How data is physically arranged can strongly affect database performance.
+
+**Cella connection:**
+Pages, records, indexes, table scans, query execution, and benchmarking.
+
+**Current status:** Not assessed
+
+### 7.16 Checksums and Data Integrity
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Checksums
+- Hash-based integrity checks
+- Detecting corrupted pages
+- Verification during reads
+- Error detection vs error correction
+
+**Why Cella needs it:**
+Cella may eventually need to detect corrupted database pages or WAL records rather than silently using invalid data.
+
+**Cella connection:**
+Persistent storage, WAL, recovery, and diagnostics.
+
+**Current status:** Not assessed
+
+### 7.17 Backup and Restore Concepts
+
+**Required depth:** Level 1–2 — Familiarity to Working Knowledge
+
+**Topics:**
+
+- Database backups
+- Full backups
+- Incremental backups
+- Restore
+- Consistent snapshots
+- Backup validation
+
+**Why Cella needs it:**
+Once Cella becomes usable by other developers, protecting persistent application data becomes an important operational concern.
+
+**Cella connection:**
+Future administration and reliability tooling.
+
+**Current status:** Not assessed
+
+### Do not need to study deeply:
+
+- NAND flash transistor design
+- SSD controller firmware
+- NVMe controller implementation
+- RAID controller hardware design
+- filesystem kernel implementation
+
 ## 8. Concurrency
+
+### 8.1 Concurrency Fundamentals
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Concurrency vs parallelism
+- Processes vs threads
+- Shared state
+- Critical sections
+- Interleavings
+- Scheduling effects
+- Deterministic vs nondeterministic behavior
+
+**Why Cella needs it:**
+Multiple database operations may execute concurrently and interact with the same in-memory and persistent state.
+
+**Cella connection:**
+Query execution, buffer pool, transactions, and server architecture.
+
+**Current status:** Not assessed
+
+### 8.2 Race Conditions and Data Races
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Race conditions
+- Data races
+- Lost updates
+- Check-then-act problems
+- Read-modify-write
+- Timing-dependent bugs
+
+**Why Cella needs it:**
+Incorrect concurrent access can corrupt database state or produce incorrect query results.
+
+**Cella connection:**
+Buffer pool, transaction management, indexes, and shared metadata.
+
+**Current status:** Not assessed
+
+### 8.3 Mutual Exclusion
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Mutexes
+- Critical sections
+- Lock ownership
+- Lock scope
+- Lock granularity
+- Contention
+
+**Why Cella needs it:**
+Shared database structures need controlled access when multiple operations modify them concurrently.
+
+**Cella connection:**
+Buffer pool, page management, transaction manager, and indexes.
+
+**Current status:** Not assessed
+
+### 8.4 Reader-Writer Synchronization
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Reader locks
+- Writer locks
+- Shared vs exclusive access
+- Reader-writer contention
+- Lock promotion/demotion concepts
+
+**Why Cella needs it:**
+Database workloads often contain many readers and fewer writers. Different access patterns can benefit from different synchronization strategies.
+
+**Cella connection:**
+Pages, indexes, table metadata, and future concurrent query execution.
+
+**Current status:** Not assessed
+
+### 8.5 Semaphores and Condition Variables
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Semaphores
+- Condition variables
+- Waiting and signaling
+- Producer-consumer patterns
+- Blocking vs spinning
+
+**Why Cella needs it:**
+Database components may need to wait for resources such as free buffer frames, locks, I/O completion, or background tasks.
+
+**Cella connection:**
+Buffer pool, background workers, transaction manager, and server.
+
+**Current status:** Not assessed
+
+### 8.6 Atomics
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Atomic operations
+- Atomic variables
+- Compare-and-swap
+- Fetch-and-add
+- Lock-free concepts
+- Atomic counters
+
+**Why Cella needs it:**
+Some database metadata and statistics may require efficient concurrent updates without using a full mutex.
+
+**Cella connection:**
+Statistics, counters, transaction state, and low-level concurrency.
+
+**Current status:** Not assessed
+
+### 8.7 Memory Ordering
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Memory visibility
+- Compiler reordering
+- CPU reordering
+- Acquire
+- Release
+- Relaxed ordering
+- Sequential consistency
+- Happens-before
+
+**Why Cella needs it:**
+Correct synchronization requires understanding when updates made by one thread become visible to another.
+
+**Cella connection:**
+Concurrent data structures, lock implementations, atomics, and transaction state.
+
+**Current status:** Not assessed
+
+### 8.8 Deadlocks
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Deadlock conditions
+- Circular wait
+- Lock ordering
+- Deadlock prevention
+- Deadlock detection
+- Deadlock recovery
+
+**Why Cella needs it:**
+A database may require multiple locks during operations. Incorrect lock acquisition can cause the entire system to stop making progress.
+
+**Cella connection:**
+Transactions, locking, buffer pool, indexes, and concurrent queries.
+
+**Current status:** Not assessed
+
+### 8.9 Starvation and Fairness
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Starvation
+- Fairness
+- Priority inversion
+- Lock fairness
+- Scheduling interactions
+
+**Why Cella needs it:**
+A system can be technically correct but still unusable if certain operations are continually prevented from making progress.
+
+**Cella connection:**
+Locking, transactions, query scheduling, and server behavior.
+
+**Current status:** Not assessed
+
+### 8.10 Locking Concepts for Databases
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Shared locks
+- Exclusive locks
+- Lock granularity
+- Row-level locking
+- Page-level locking
+- Table-level locking
+- Lock compatibility
+- Lock acquisition and release
+
+**Why Cella needs it:**
+Database concurrency requires stronger semantics than simply protecting individual C++ objects.
+
+**Cella connection:**
+Transactions, isolation, concurrent reads/writes, and recovery.
+
+**Current status:** Not assessed
+
+### 8.10 Locking Concepts for Databases
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Shared locks
+- Exclusive locks
+- Lock granularity
+- Row-level locking
+- Page-level locking
+- Table-level locking
+- Lock compatibility
+- Lock acquisition and release
+
+**Why Cella needs it:**
+Database concurrency requires stronger semantics than simply protecting individual C++ objects.
+
+**Cella connection:**
+Transactions, isolation, concurrent reads/writes, and recovery.
+
+**Current status:** Not assessed
+
+### 8.11 Transaction Concurrency
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Concurrent transactions
+- Interleaved operations
+- Serial execution
+- Serializability
+- Conflicting operations
+- Read/write conflicts
+- Lost updates
+- Dirty reads
+- Non-repeatable reads
+- Phantom reads
+
+**Why Cella needs it:**
+Cella must eventually define what users can expect when multiple transactions execute at the same time.
+
+**Cella connection:**
+Transaction manager, query execution, locking, isolation, and recovery.
+
+**Current status:** Not assessed
+
+### 8.12 Isolation Levels
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Read uncommitted
+- Read committed
+- Repeatable read
+- Serializable
+- Isolation anomalies
+- Trade-offs between isolation and concurrency
+
+**Why Cella needs it:**
+Developers need predictable semantics when multiple transactions operate concurrently.
+
+**Cella connection:**
+Transaction system and SQL behavior.
+
+**Current status:** Not assessed
+
+### 8.13 MVCC Concepts
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Multi-version concurrency control
+- Versioned records
+- Snapshots
+- Visibility
+- Transaction IDs
+- Old-version cleanup
+- MVCC vs locking
+
+**Why Cella needs it:**
+MVCC is a major approach used by relational databases to allow concurrent readers and writers while maintaining transaction isolation.
+
+**Cella connection:**
+Future transaction and concurrency architecture.
+
+**Current status:** Not assessed
+
+### 8.14 Thread Pools and Worker Models
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Worker threads
+- Thread pools
+- Task queues
+- Work distribution
+- Background workers
+
+**Why Cella needs it:**
+A future Cella server may need worker threads for client requests, background flushing, checkpointing, or maintenance tasks.
+
+**Cella connection:**
+Database server and background services.
+
+**Current status:** Not assessed
+
+### 8.15 Concurrent Data Structures
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Thread-safe containers
+- Concurrent queues
+- Lock-based structures
+- Lock-free concepts
+- Atomic counters
+
+**Why Cella needs it:**
+Some internal database components may be shared by multiple threads and require safe concurrent access.
+
+**Cella connection:**
+Buffer management, statistics, task queues, and server components.
+
+**Current status:** Not assessed
+
+### 8.16 Concurrency Testing
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Stress testing
+- Repeated concurrent execution
+- Race detection
+- Thread sanitization
+- Deterministic reproduction of concurrency bugs
+- Randomized scheduling
+- Fault injection
+
+**Why Cella needs it:**
+Concurrency bugs can be rare, timing-dependent, and difficult to reproduce. Cella will need deliberate testing rather than relying on ordinary unit tests.
+
+**Cella connection:**
+Concurrency subsystem, transaction system, buffer pool, and server.
+
+**Current status:** Not assessed
+
+### 8.17 Synchronization Performance
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Lock contention
+- Critical-section size
+- Lock granularity
+- Throughput vs contention
+- Scalability
+- Amdahl's law
+
+**Why Cella needs it:**
+A concurrency mechanism can be correct but still perform poorly if threads spend too much time waiting on each other.
+
+**Cella connection:**
+Transaction processing, buffer pool, query execution, and benchmarking.
+
+**Current status:** Not assessed
+
+### Not initially required:
+
+- Advanced lock-free algorithms
+- Advanced wait-free algorithms
+- CPU-specific synchronization optimizations
+- Kernel scheduler implementation
+- Advanced formal verification
 
 ## 9. Networking
 
