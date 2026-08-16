@@ -670,6 +670,214 @@ Query execution, serialization, indexing, concurrency, and benchmarking.
 
 **Current status:** Not assessed
 
+### 5.2 Memory Hierarchy
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Registers
+- CPU cache
+- L1/L2/L3 cache
+- RAM
+- Storage
+- Memory latency
+- Cache lines
+- Locality of reference
+- Temporal locality
+- Spatial locality
+
+**Why Cella needs it:**
+Database performance depends heavily on how data moves between CPU, cache, RAM, and persistent storage.
+
+**Cella connection:**
+Buffer pool, page layout, indexes, query execution, and performance optimization.
+
+**Current status:** Not assessed
+
+### 5.3 Cache Behavior
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Cache hits
+- Cache misses
+- Cache lines
+- Sequential access
+- Random access
+- Cache locality
+- False sharing
+
+**Why Cella needs it:**
+The physical organization of database data can significantly affect performance even when two algorithms have similar theoretical complexity.
+
+**Cella connection:**
+Page layout, indexes, buffer pool, and query execution.
+
+**Current status:** Not assessed
+
+### 5.4 Virtual Memory
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Virtual addresses
+- Physical addresses
+- Pages
+- Page tables
+- Address translation
+- Memory protection
+- Page faults
+- Memory-mapped files
+
+**Why Cella needs it:**
+Cella runs as a user-space process and relies on the operating system's virtual memory system. Understanding this is important for understanding memory usage and later concepts such as `mmap`.
+
+**Cella connection:**
+Memory management, buffer pool, and possible future memory-mapped storage.
+
+**Current status:** Not assessed
+
+### 5.5 I/O and Storage Hardware
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- HDD
+- SSD
+- NVMe
+- Sequential I/O
+- Random I/O
+- I/O latency
+- Throughput
+- IOPS
+- Storage hierarchy
+
+**Why Cella needs it:**
+A database is fundamentally a system that manages data between memory and persistent storage. Understanding storage behavior is essential for making sensible storage-engine decisions.
+
+**Cella connection:**
+Persistent storage, page management, WAL, recovery, and benchmarking.
+
+**Current status:** Not assessed
+
+### 5.6 DMA and Device I/O Concepts
+
+**Required depth:** Level 1 — Familiarity
+
+**Topics:**
+
+- Device controllers
+- DMA
+- CPU involvement in I/O
+- Basic device-to-memory data movement
+
+**Why Cella needs it:**
+Provides context for understanding how data moves between hardware and memory without requiring detailed hardware implementation knowledge.
+
+**Cella connection:**
+Storage and I/O understanding.
+
+**Current status:** Not assessed
+
+### 5.7 Endianness and Data Representation
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Little-endian
+- Big-endian
+- Byte order
+- Integer representation
+- Binary representation
+- Portable data formats
+
+**Why Cella needs it:**
+Cella's persistent file format must have a clearly defined representation for stored values.
+
+**Cella connection:**
+Serialization, page format, record format, indexes, and database files.
+
+**Current status:** Not assessed
+
+### 5.8 Atomicity at the Hardware Level
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Atomic operations
+- Atomic reads/writes
+- CPU atomic instructions
+- Memory ordering concepts
+- Relationship between hardware atomicity and software synchronization
+
+**Why Cella needs it:**
+Later Cella components will involve concurrent access to shared state. Understanding what hardware can guarantee is necessary before reasoning about higher-level synchronization.
+
+**Cella connection:**
+Concurrency control, locks, transaction management, and server components.
+
+**Current status:** Not assessed
+
+### 5.9 Memory Ordering
+
+**Required depth:** Level 2 initially, deeper when concurrency is implemented
+
+**Topics:**
+
+- Compiler reordering
+- CPU reordering
+- Memory visibility
+- Acquire/release concepts
+- Sequential consistency
+- Happens-before relationship
+
+**Why Cella needs it:**
+Concurrent database components must reason correctly about when one thread's changes become visible to another thread.
+
+**Cella connection:**
+Concurrency, buffer management, transaction processing, and future multi-threaded execution.
+
+**Current status:** Not assessed
+
+### 5.10 Performance Fundamentals
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Latency
+- Throughput
+- CPU utilization
+- Memory bandwidth
+- Cache effects
+- I/O bottlenecks
+- CPU-bound vs I/O-bound workloads
+- Basic profiling concepts
+
+**Why Cella needs it:**
+Cella's goal includes being lightweight and reasonably fast. Performance claims should eventually be based on measurement rather than assumptions.
+
+**Cella connection:**
+Benchmarking, query execution, storage engine, and developer tools.
+
+**Current status:** Not assessed
+
+### Do not need to study
+
+❌ Digital circuit design
+❌ Verilog/VHDL
+❌ CPU microarchitecture implementation
+❌ Designing your own processor
+❌ Advanced assembly programming
+❌ GPU architecture
+❌ Compiler backend implementation
+
 ## 6. Operating Systems
 
 ## 7. Filesystems & Storage
