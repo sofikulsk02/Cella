@@ -421,7 +421,254 @@ Development, debugging, storage experiments, performance analysis, and server de
 
 ## 4. Data Structures
 
+### 4.1 Arrays and Dynamic Arrays
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Arrays
+- Dynamic arrays
+- Contiguous memory
+- Resizing
+- Indexing
+- Time complexity of common operations
+
+**Why Cella needs it:**
+Database pages, buffers, records, keys, and internal collections often rely on contiguous memory and efficient indexed access.
+
+**Cella connection:**
+Pages, buffer pool, records, internal data structures.
+
+**Current status:** Not assessed
+
+### 4.2 Linked Lists
+
+**Required depth:** Level 1 — Familiarity
+
+**Topics:**
+
+- Singly linked lists
+- Doubly linked lists
+- Node-based storage
+- Pointer-based traversal
+- Insertion and deletion
+
+**Why Cella needs it:**
+Linked lists are useful for understanding pointer-based structures and may appear in some internal structures, although they are unlikely to be central to Cella's storage engine.
+
+**Cella connection:**
+Internal utilities and general systems knowledge.
+
+**Current status:** Not assessed
+
+### 4.3 Stacks and Queues
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Stack
+- Queue
+- Deque
+- LIFO
+- FIFO
+- Basic implementation and complexity
+
+**Why Cella needs it:**
+Stacks and queues appear in parsing, execution, buffering, scheduling, and other internal algorithms.
+
+**Cella connection:**
+Query processing, execution, buffering, and internal algorithms.
+
+**Current status:** Not assessed
+
+### 4.4 Hash Tables
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Hash functions
+- Buckets
+- Collisions
+- Chaining
+- Open addressing
+- Load factor
+- Resizing
+- Average and worst-case complexity
+
+**Why Cella needs it:**
+Hash-based structures can be useful for metadata lookup, caches, internal maps, and potentially hash indexes.
+
+**Cella connection:**
+Buffer management, metadata, internal lookup structures, possible future indexes.
+
+**Current status:** Not assessed
+
+### 4.5 Trees
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Tree terminology
+- Binary trees
+- Binary search trees
+- Tree traversal
+- Balanced trees
+- Search complexity
+
+**Why Cella needs it:**
+Trees provide the conceptual foundation for understanding database indexes and B-trees.
+
+**Cella connection:**
+Indexing.
+
+**Current status:** Not assessed
+
+### 4.6 Heaps and Priority Queues
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Binary heap
+- Min heap
+- Max heap
+- Heap operations
+- Priority queues
+- Complexity
+
+**Why Cella needs it:**
+Priority queues can be useful in query processing, scheduling, and other algorithms.
+
+**Cella connection:**
+Query execution and internal scheduling where applicable.
+
+**Current status:** Not assessed
+
+### 4.7 B-Trees
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Multi-way trees
+- Node structure
+- Search
+- Insertion
+- Splitting
+- Deletion
+- Merging
+- Balancing
+- Height
+- Disk/page-oriented design
+
+**Why Cella needs it:**
+B-trees are a fundamental database indexing structure and connect in-memory tree concepts with storage-oriented data structures.
+
+**Cella connection:**
+Database indexes and storage engine.
+
+**Current status:** Not assessed
+
+### 4.8 B+ Trees
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- B-tree vs B+ tree
+- Internal nodes
+- Leaf nodes
+- Leaf-level links
+- Range scans
+- Search
+- Insertion
+- Splitting
+- Deletion
+- Page-oriented implementation
+
+**Why Cella needs it:**
+Cella will need an efficient indexing structure suitable for persistent storage and range queries.
+
+**Cella connection:**
+Primary indexing system.
+
+**Current status:** Not assessed
+
+### 4.9 LRU and Cache Replacement Concepts
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Cache locality
+- LRU
+- MRU
+- Eviction
+- Hit rate
+- Miss rate
+- Basic replacement strategies
+
+**Why Cella needs it:**
+Cella will eventually keep frequently used database pages in memory through a buffer pool.
+
+**Cella connection:**
+Buffer pool and page cache.
+
+**Current status:** Not assessed
+
+### 4.10 Complexity and Performance Analysis
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Big-O
+- Big-Theta
+- Big-Omega
+- Amortized analysis
+- Time complexity
+- Space complexity
+- I/O complexity
+- Trade-offs between memory and storage
+
+**Why Cella needs it:**
+Database design decisions are heavily influenced by the cost of CPU operations, memory access, and especially disk/storage I/O.
+
+**Cella connection:**
+Storage, indexes, query execution, caching, and benchmarking.
+
+**Current status:** Not assessed
+
 ## 5. Computer Architecture
+
+## 5. Computer Architecture
+
+### 5.1 CPU Fundamentals
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- CPU
+- Instruction execution
+- Registers
+- Program counter
+- Instruction cycle
+- CPU cores
+- Threads
+- Basic instruction execution
+
+**Why Cella needs it:**
+Understanding how Cella's code executes on the CPU helps explain performance, concurrency, and the difference between CPU-bound and I/O-bound operations.
+
+**Cella connection:**
+Query execution, serialization, indexing, concurrency, and benchmarking.
+
+**Current status:** Not assessed
 
 ## 6. Operating Systems
 
