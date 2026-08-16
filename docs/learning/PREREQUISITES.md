@@ -3325,6 +3325,449 @@ Development workflow and experiment automation.
 
 ## 12. Debugging & Performance
 
+### 12.1 Debugging Fundamentals
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Debugging methodology
+- Reproducing bugs
+- Minimal reproduction
+- Breakpoints
+- Stepping
+- Call stacks
+- Stack frames
+- Variables and memory inspection
+- Watchpoints
+- Conditional breakpoints
+
+**Why Cella needs it:**
+Cella will contain multiple interacting low-level components. Bugs may appear far away from the original cause, so systematic debugging will be essential.
+
+**Cella connection:**
+All implementation stages.
+
+**Current status:** Not assessed
+
+### 12.2 GDB / LLDB
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Starting programs under a debugger
+- Breakpoints
+- Conditional breakpoints
+- Stepping
+- Stack traces
+- Inspecting variables
+- Inspecting memory
+- Threads
+- Watchpoints
+- Debugging crashes
+
+**Why Cella needs it:**
+A database engine will eventually involve complex state, pointer-heavy structures, storage metadata, and concurrent execution.
+
+**Cella connection:**
+Storage engine, indexing, transactions, concurrency, and server.
+
+**Current status:** Not assessed
+
+### 12.3 Core Dumps and Crash Analysis
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Core dumps
+- Segmentation faults
+- Crash signals
+- Stack traces after crashes
+- Post-mortem debugging
+
+**Why Cella needs it:**
+Cella must be investigated when it crashes unexpectedly, especially when the crash occurs after the original bug has already corrupted state.
+
+**Cella connection:**
+Low-level debugging and crash testing.
+
+**Current status:** Not assessed
+
+### 12.4 Assertions and Invariants
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Assertions
+- Preconditions
+- Postconditions
+- Internal invariants
+- Defensive programming
+- State validation
+
+**Why Cella needs it:**
+Database components have strict structural rules. Assertions can detect invalid internal states close to the point where they occur.
+
+**Cella connection:**
+Pages, B+ trees, buffer pool, transactions, query execution, and recovery.
+
+**Current status:** Not assessed
+
+### 12.5 AddressSanitizer
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- AddressSanitizer
+- Out-of-bounds access
+- Use-after-free
+- Double-free
+- Stack and heap corruption
+- Memory error reports
+
+**Why Cella needs it:**
+Cella will manipulate raw memory, pages, buffers, and low-level data structures where memory errors can corrupt persistent state or produce extremely difficult bugs.
+
+**Cella connection:**
+Storage engine, buffer pool, page management, and records.
+
+**Current status:** Not assessed
+
+### 12.6 UndefinedBehaviorSanitizer
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Undefined behavior
+- Integer overflow
+- Invalid shifts
+- Misaligned access
+- Invalid casts
+- Runtime UB detection
+
+**Why Cella needs it:**
+Low-level C++ code can silently enter undefined behavior that later causes incorrect database state or crashes.
+
+**Cella connection:**
+All low-level components.
+
+**Current status:** Not assessed
+
+### 12.7 ThreadSanitizer
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- ThreadSanitizer
+- Data race detection
+- Race reports
+- Thread synchronization analysis
+
+**Why Cella needs it:**
+Concurrent database components may contain race conditions that normal tests fail to reproduce.
+
+**Cella connection:**
+Concurrency, transactions, buffer pool, and server.
+
+**Current status:** Not assessed
+
+### 12.8 Logging
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Log levels
+- Structured logs
+- Debug logs
+- Error logs
+- Contextual information
+- Log rotation concepts
+- Logging performance
+
+**Why Cella needs it:**
+A database needs useful diagnostic information for understanding failures and observing internal behavior.
+
+**Cella connection:**
+All subsystems, especially server, transactions, storage, and recovery.
+
+**Current status:** Not assessed
+
+### 12.9 Tracing and Observability
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Tracing
+- Events
+- Timings
+- Request tracing
+- Internal operation visibility
+- Trace correlation
+
+**Why Cella needs it:**
+Cella's goal includes transparent internals. Developers should eventually be able to understand what happens during database operations.
+
+**Cella connection:**
+Developer tools, query execution, transactions, and server operations.
+
+**Current status:** Not assessed
+
+### 12.10 Profiling
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- CPU profiling
+- Sampling profilers
+- Hot paths
+- Call graphs
+- CPU-bound workloads
+- Profiling methodology
+
+**Why Cella needs it:**
+Performance improvements should come from measured bottlenecks rather than assumptions.
+
+**Cella connection:**
+Query engine, indexing, storage engine, and benchmarks.
+
+**Current status:** Not assessed
+
+### 12.11 Memory Profiling
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Memory usage
+- Heap allocation
+- Allocation patterns
+- Memory leaks
+- Memory fragmentation
+- Peak memory usage
+
+**Why Cella needs it:**
+Cella should remain lightweight, so memory usage must eventually be measured and understood.
+
+**Cella connection:**
+Buffer pool, query execution, indexes, and server.
+
+**Current status:** Not assessed
+
+### 12.12 I/O Profiling
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Disk I/O
+- Read/write throughput
+- I/O latency
+- Random vs sequential I/O
+- IOPS
+- I/O wait
+- System-call frequency
+
+**Why Cella needs it:**
+Databases are heavily influenced by storage I/O. Understanding where I/O time is spent is essential for storage-engine design.
+
+**Cella connection:**
+Pages, buffer pool, WAL, storage engine, and recovery.
+
+**Current status:** Not assessed
+
+### 12.13 Benchmarking Fundamentals
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Benchmark design
+- Warm-up
+- Cold vs warm cache
+- Repetitions
+- Variance
+- Latency
+- Throughput
+- Percentiles
+- Workload design
+- Benchmark fairness
+
+**Why Cella needs it:**
+Cella should eventually make measurable performance claims instead of relying on intuition.
+
+**Cella connection:**
+`cella benchmark`, storage, indexing, queries, transactions, and server.
+
+**Current status:** Not assessed
+
+### 12.14 Query Benchmarking
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Query execution time
+- Sequential scan benchmarks
+- Index lookup benchmarks
+- Insert/update/delete workloads
+- Join benchmarks
+- Aggregation benchmarks
+- Dataset scaling
+
+**Why Cella needs it:**
+Cella must be tested with realistic workloads to understand how performance changes as data grows.
+
+**Cella connection:**
+Query engine, indexes, storage engine, and optimizer.
+
+**Current status:** Not assessed
+
+### 12.15 Storage Benchmarking
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Sequential writes
+- Random writes
+- Sequential reads
+- Random reads
+- Page-size effects
+- Buffer-pool effects
+- WAL overhead
+- Flush overhead
+
+**Why Cella needs it:**
+Storage decisions should be validated experimentally rather than assumed to be optimal.
+
+**Cella connection:**
+Storage engine, page manager, buffer pool, WAL, and recovery.
+
+**Current status:** Not assessed
+
+### 12.16 Scalability Testing
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Dataset scaling
+- Concurrent clients
+- Thread scaling
+- Throughput scaling
+- Memory scaling
+- Performance bottlenecks
+- Saturation points
+
+**Why Cella needs it:**
+Cella's behavior should be understood as workloads grow, even if it is not intended to compete with large production databases.
+
+**Cella connection:**
+Real-world validation and future releases.
+
+**Current status:** Not assessed
+
+### 12.17 Fault Injection
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Simulated crashes
+- Forced process termination
+- I/O failure simulation
+- Partial operation failures
+- Network failures
+- Fault injection methodology
+
+**Why Cella needs it:**
+Reliability cannot be established only through successful-path testing. Cella must eventually be tested under failures.
+
+**Cella connection:**
+Transactions, WAL, recovery, networking, and reliability.
+
+**Current status:** Not assessed
+
+### 12.18 Regression Testing
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Regression tests
+- Test suites
+- Reproducing historical bugs
+- Automated testing
+- Continuous integration
+- Test coverage concepts
+
+**Why Cella needs it:**
+As Cella grows, changes to one subsystem may break another. Previously fixed bugs should remain fixed.
+
+**Cella connection:**
+Entire project and GitHub CI.
+
+**Current status:** Not assessed
+
+### 12.19 Performance Regression Testing
+
+**Required depth:** Level 2 — Working Knowledge
+
+**Topics:**
+
+- Baseline benchmarks
+- Performance comparisons
+- Detecting regressions
+- Benchmark automation
+- Historical performance tracking
+
+**Why Cella needs it:**
+Optimizing one part of Cella should not silently make another workload significantly slower.
+
+**Cella connection:**
+Benchmarking and release validation.
+
+**Current status:** Not assessed
+
+### 12.20 Debugging Methodology
+
+**Required depth:** Level 3 — Deep Understanding
+
+**Topics:**
+
+- Hypothesis-driven debugging
+- Binary search through changes
+- Minimizing reproductions
+- Instrumentation
+- Reading stack traces
+- Examining system state
+- Separating symptoms from root causes
+
+**Why Cella needs it:**
+Systems bugs are often indirect and difficult to reproduce. A disciplined debugging methodology is as important as knowledge of individual tools.
+
+**Cella connection:**
+Entire project.
+
+**Current status:** Not assessed
+
+### Not initially required:
+
+- Kernel-level performance analysis
+- Advanced CPU performance counters
+- Hardware tracing
+- Advanced distributed tracing infrastructure
+- Production observability platforms
+
 ## 13. Dependency Map
 
 ## 14. Prerequisite Completion Criteria
