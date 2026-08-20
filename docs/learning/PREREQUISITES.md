@@ -3770,4 +3770,69 @@ Entire project.
 
 ## 13. Dependency Map
 
+                    YOUR CURRENT STATE
+                           │
+             ┌─────────────┴─────────────┐
+             │                           │
+        C++ — Strong              DSA — Strong
+             │                           │
+             └─────────────┬─────────────┘
+                           │
+                           ▼
+                Linux / POSIX Basics
+                           │
+                           ▼
+                  OS + System Calls
+                           │
+                ┌──────────┴──────────┐
+                │                     │
+                ▼                     ▼
+         File I/O                Binary Data
+                │                     │
+                └──────────┬──────────┘
+                           ▼
+                    Storage Concepts
+                           │
+                           ▼
+                 Database Foundations
+                           │
+                           ▼
+                    CELLA DAY 1
+                           │
+                           ▼
+                  Persistent Storage
+                           │
+                           ▼
+                       Pages
+                           │
+                           ▼
+                      Records
+                           │
+                           ▼
+                       Tables
+                           │
+                           ▼
+                     B+ Trees
+                           │
+                           ▼
+                     Buffer Pool
+                           │
+                           ▼
+                    Query Engine
+                           │
+                           ▼
+                   Transactions
+                           │
+                           ▼
+                   WAL + Recovery
+                           │
+                           ▼
+                    Concurrency
+                           │
+                           ▼
+                      Networking
+                           │
+                           ▼
+                    Cella Server
+
 ## 14. Prerequisite Completion Criteria
