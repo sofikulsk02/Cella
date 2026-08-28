@@ -118,7 +118,7 @@ in my own way, with my own identity.
 
 And honestly, I want to have fun doing it.
 
-## 5. What I Want Cella to Become
+## 6. What I Want Cella to Become
 
 At the beginning, Cella was simply an idea: build a database to
 understand databases.

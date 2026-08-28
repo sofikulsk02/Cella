@@ -21,7 +21,6 @@
 Cella aims to become a **lightweight, reliable, developer-friendly relational database** that developers can actually use to build small and medium-sized applications and projects.
 
 Cella is also intended to be an unusually transparent database project. Its implementation, design decisions, experiments, benchmarks, documentation, and development history should allow anyone interested in databases to study how a database is built from the ground up and use that knowledge to build their own.
-
 The long-term vision is therefore twofold:
 
 1. Build a genuinely usable database.
